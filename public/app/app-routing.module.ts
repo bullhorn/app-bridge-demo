@@ -15,7 +15,7 @@ const routes: Routes = [
     imports: [
         // NG2
         CommonModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, { useHash: true })
     ],
     exports: [
         // NG2
