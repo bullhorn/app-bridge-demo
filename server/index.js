@@ -10,6 +10,20 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 // Catch all other routes and return the index file
+app.get('/no-app.html', (req, res, next) => {
+    // Check for session!
+    // Redirect if no session!
+    next();
+}, (req, res) => {
+    res.render('no-app.html', {
+        settings: {},
+        entitlements: {},
+        ulUrl: '',
+        ulLoginPage: '',
+        environment: 'development'
+    });
+});
+
 app.get('*', (req, res, next) => {
     // Check for session!
     // Redirect if no session!
@@ -24,7 +38,7 @@ app.get('*', (req, res, next) => {
     });
 });
 
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '3001';
 app.set('port', port);
 
 const server = http.createServer(app);
