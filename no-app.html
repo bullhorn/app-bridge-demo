@@ -11,29 +11,31 @@
 </head>
 
 <body>
-    Hello!
+    <h1>Custom Application that IS NOT Angular Based</h1>
+    <button id="getFile">Get File</button>
 </body>
 
 <script>
     postRobot.CONFIG.LOG_LEVEL = 'error';
-    console.log('LOADED!!!');
+
     postRobot.sendToParent('register', {
-        title: 'TITLE',
+        title: 'Custom Title',
         url: window.location.href,
         color: 'red'
     }).then(function (event) {
-        console.log('REGISTER DONE', event);
+        console.log('[No-App] - Register Complete', event);
     });
+
     postRobot.on('customEvent', function (event) {
-        console.log('GOT CUSTOM EVENT', event);
+        console.log('[No-App] - Custom Event', event);
     });
-    setTimeout(function () {
+    document.getElementById('getFile').addEventListener('click', function () {
         postRobot.sendToParent('httpGET', {
             relativeURL: '/test'
         }).then(function (event) {
-            console.log('GET DONE', event);
+            console.log('[No-App] - Get Request Complete', event);
         });
-    }, 2000);
+    });
 
 </script>
 
