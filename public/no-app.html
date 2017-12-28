@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>No NG App!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="//rawgit.com/bullhorn/bullhorn-icons/development/fonts/Bullhorn-Glyphicons.css" rel="stylesheet" type="text/css">
+    <script src="//cdn.rawgit.com/krakenjs/post-robot/7da06445/dist/post-robot.js"></script>
+</head>
+
+<body>
+    <h1>Custom Application that IS NOT Angular Based</h1>
+    <button id="getFile">Get File</button>
+</body>
+
+<script>
+    postRobot.CONFIG.LOG_LEVEL = 'error';
+
+    postRobot.sendToParent('register', {
+        title: 'Custom Title',
+        url: window.location.href,
+        color: 'red'
+    }).then(function (event) {
+        console.log('[No-App] - Register Complete', event);
+    });
+
+    postRobot.on('customEvent', function (event) {
+        console.log('[No-App] - Custom Event', event);
+    });
+    document.getElementById('getFile').addEventListener('click', function () {
+        postRobot.sendToParent('httpGET', {
+            relativeURL: '/test'
+        }).then(function (event) {
+            console.log('[No-App] - Get Request Complete', event);
+        });
+    });
+
+</script>
+
+</html>
